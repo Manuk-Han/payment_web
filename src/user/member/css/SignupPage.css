@@ -1,0 +1,47 @@
+.signup-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+}
+
+.signup-container {
+    background-color: #fff;
+    padding: 25px 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.oauth-options {
+    margin-top: 20px;
+}
+
+.oauth-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.oauth-button.kakao {
+    background-color: #FEE500;
+    color: #3C1E1E;
+}
+
+.oauth-button.google {
+    background-color: #DB4437;
+    color: white;
+}
+
+.oauth-button:hover {
+    opacity: 0.9;
+}
