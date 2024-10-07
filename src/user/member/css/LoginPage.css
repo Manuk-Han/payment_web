@@ -19,53 +19,30 @@ h2 {
     margin-bottom: 20px;
 }
 
-.input-group {
-    margin-bottom: 15px;
-    text-align: left;
+.oauth-options {
+    margin-top: 20px;
 }
 
-.input-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.login-button {
+.oauth-button {
     width: 100%;
     padding: 10px;
-    background-color: #4CAF50;
-    color: white;
+    margin-top: 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
 }
 
-.login-button:hover {
-    background-color: #45a049;
+.oauth-button.kakao {
+    background-color: #FEE500;
+    color: #3C1E1E;
 }
 
-.extra-options {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
+.oauth-button.google {
+    background-color: #DB4437;
+    color: white;
 }
 
-.link-button {
-    background: none;
-    border: none;
-    color: #007BFF;
-    cursor: pointer;
-    text-decoration: underline;
+.oauth-button:hover {
+    opacity: 0.9;
 }
 
-.link-button:hover {
-    color: #0056b3;
-}
