@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './css/LoginPage.css';
 import SignupPage from './SignupPage';
+import {useNavigate} from "react-router-dom";
 
 interface SignInForm {
     email: string;
@@ -11,6 +12,8 @@ const LoginPage: React.FC = () => {
     const [isSignupOpen, setIsSignupOpen] = useState(false);
     const [loginEmail, setLoginEmail] = useState('');
     const [signInForm, setSignInForm] = useState<SignInForm>({ email: '', password: '' });
+
+    const navigate = useNavigate();
 
     const handleOAuthLogin = (provider: string) => {
         window.location.href = `http://localhost:8080/oauth2/authorization/${provider}`;
@@ -40,7 +43,7 @@ const LoginPage: React.FC = () => {
                     document.cookie = `refreshToken=${data}; path=/; secure; samesite=strict`;
                 }
 
-                // window.location.href = 'http://localhost:3000/home';
+                navigate('/home', { replace: true })
             } else {
                 console.log('로그인 실패');
             }
