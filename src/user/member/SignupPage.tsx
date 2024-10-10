@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import './css/LoginPage.css';
 
+interface SignupPageProps {
+    closePopup: () => void;
+    setLoginEmail: React.Dispatch<React.SetStateAction<string>>;
+    setIsSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 interface SignUpForm {
-    name: string
+    name: string;
     email: string;
     password: string;
 }
 
-interface SignupPageProps {
-    closePopup: () => void;
-}
-
-const SignupPage: React.FC<SignupPageProps> = ({ closePopup }) => {
+const SignupPage: React.FC<SignupPageProps> = ({ closePopup, setLoginEmail, setIsSignupOpen }) => {
     const [signUpForm, setSignUpForm] = useState<SignUpForm>({ name: '', email: '', password: '' });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,8 +21,26 @@ const SignupPage: React.FC<SignupPageProps> = ({ closePopup }) => {
         setSignUpForm({ ...signUpForm, [name]: value });
     };
 
-    const handleFormSubmit = () => {
-        console.log('Signing up with', signUpForm);
+    const handleFormSubmit = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/member/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(signUpForm),
+            });
+
+            if (response.ok) {
+                console.log('회원가입 성공');
+                setLoginEmail(signUpForm.email);
+                setIsSignupOpen(false);
+            } else {
+                console.log('회원가입 실패');
+            }
+        } catch (error) {
+            console.error('Error during signup:', error);
+        }
     };
 
     return (
@@ -30,7 +50,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ closePopup }) => {
                 <h2>회원가입</h2>
                 <div className="form-container">
                     <input
-                        type="name"
+                        type="text"
                         name="name"
                         placeholder="이름"
                         value={signUpForm.name}
@@ -55,6 +75,6 @@ const SignupPage: React.FC<SignupPageProps> = ({ closePopup }) => {
             </div>
         </div>
     );
-}
+};
 
 export default SignupPage;

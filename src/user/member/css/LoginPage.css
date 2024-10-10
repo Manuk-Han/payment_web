@@ -124,11 +124,10 @@ h2 {
 }
 
 .popup-content {
-    background-color: #fff;
+    background-color: white;
     padding: 20px;
     border-radius: 8px;
     width: 400px;
-    text-align: center;
     position: relative;
 }
 
@@ -138,6 +137,8 @@ h2 {
     right: 10px;
     background: none;
     border: none;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
 }
+
+
