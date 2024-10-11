@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './css/HeaderComponent.css';
 import cartIcon from '../image/cart_icon.png';
 import userIcon from '../image/user_icon.png';
@@ -8,12 +8,13 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 
 interface HeaderComponentProps {
+    tab?: PageTabs;
     onTabChange: (tab: PageTabs) => void;
 }
 
-const HeaderComponent: React.FC<HeaderComponentProps> = ({ onTabChange }) => {
+const HeaderComponent: React.FC<HeaderComponentProps> = ({ tab, onTabChange }) => {
     const { userRole } = useSelector((state: RootState) => state.auth);
-    const [selectedTab, setSelectedTab] = useState<PageTabs>(PageTabs.PRODUCT);
+    const [selectedTab, setSelectedTab] = useState<PageTabs>(tab);
 
     const handleTabClick = (tab: PageTabs) => {
         setSelectedTab(tab);

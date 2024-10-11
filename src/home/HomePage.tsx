@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../redux/authSlice';
 import { jwtDecode } from 'jwt-decode';
 import './css/HomePage.css';
 import Header from './Header';
 import Footer from './Footer';
-import Dashboard from "../content/Dashboard";
+import Dashboard from "../content/dashboard/Dashboard";
 import HeaderComponent from "../content/HeaderComponent";
 import { UserRole } from '../redux/roles';
 import { PageTabs } from '../redux/Tabs';
@@ -17,16 +17,26 @@ interface DecodedToken {
     [key: string]: any;
 }
 
-const HomePage = () => {
+interface HomePageProps {
+    nowTab?: PageTabs;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ nowTab = PageTabs.PRODUCT }) => {
     const dispatch = useDispatch();
     const location = useLocation();
-    const [selectedTab, setSelectedTab] = useState<PageTabs>(PageTabs.PRODUCT);
+    const navigate = useNavigate();
+    const [selectedTab, setSelectedTab] = useState<PageTabs>(nowTab);
 
     const handleTabChange = (tab: PageTabs) => {
         setSelectedTab(tab);
+        window.history.pushState(null, '', tab);
     };
 
     useEffect(() => {
+        if (location.pathname === PageTabs.PRODUCT || location.pathname === PageTabs.PRICE) {
+            setSelectedTab(location.pathname as PageTabs);
+        }
+
         const params = new URLSearchParams(location.search);
         let accessToken = params.get('accessToken');
         let refreshToken = params.get('refreshToken');
@@ -46,6 +56,8 @@ const HomePage = () => {
                 localStorage.setItem('accessToken', accessToken);
                 localStorage.setItem('refreshToken', refreshToken);
                 dispatch(setCredentials({ accessToken, refreshToken, userEmail: email, userRole: role }));
+
+                window.history.pushState(null, '', '/');
             } catch (error) {
                 console.error('Invalid token:', error);
             }
@@ -56,7 +68,7 @@ const HomePage = () => {
         <div className="page-container">
             <Header />
             <div className="content">
-                <HeaderComponent onTabChange={handleTabChange} />
+                <HeaderComponent tab={nowTab} onTabChange={handleTabChange} />
                 <Dashboard selectedTab={selectedTab} />
             </div>
             <Footer />
