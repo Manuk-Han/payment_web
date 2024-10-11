@@ -4,7 +4,7 @@ import SignupPage from './SignupPage';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../redux/authSlice';
-import axiosInstance from '../../../axiosInstance';
+import axiosInstance from '../../config/axiosInstance';
 
 interface SignInForm {
     email: string;

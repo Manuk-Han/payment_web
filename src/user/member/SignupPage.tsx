@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './css/LoginPage.css';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../redux/authSlice';
-import axiosInstance from '../../../axiosInstance';
+import axiosInstance from '../../config/axiosInstance';
 
 interface SignupPageProps {
     closePopup: () => void;
