@@ -3,43 +3,44 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 20px;
+    padding: 2vw;
 }
 
 .login-container {
     background-color: #fff;
-    padding: 30px 50px;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    max-width: 400px;
-    width: 100%;
+    padding: 3vw 5vw;
+    border-radius: 1vw;
+    box-shadow: 0 0.8vw 1.6vw rgba(0, 0, 0, 0.3);
+    max-width: 20vw;
+    max-height: 60vh;
+    width: 40%;
     text-align: center;
 }
 
 h2 {
-    margin-bottom: 25px;
-    font-size: 24px;
+    margin-bottom: 2vw;
+    font-size: 1.8vw;
     color: #333;
 }
 
 .form-container input {
     width: 90%;
-    padding: 12px;
-    margin: 8px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
+    padding: 1vw;
+    margin: 0.8vw 0;
+    border: 0.1vw solid #ddd;
+    border-radius: 0.5vw;
+    font-size: 1.2vw;
 }
 
 .form-container button {
     width: 100%;
-    padding: 12px;
-    margin-top: 12px;
+    padding: 1vw;
+    margin-top: 1vw;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5vw;
     background-color: #007bff;
     color: white;
-    font-size: 18px;
+    font-size: 1.5vw;
     cursor: pointer;
 }
 
@@ -48,17 +49,17 @@ h2 {
 }
 
 .oauth-options {
-    margin-top: 30px;
+    margin-top: 2vw;
 }
 
 .oauth-button {
     width: 100%;
-    padding: 12px;
-    margin-top: 12px;
+    padding: 1vw;
+    margin-top: 1vw;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5vw;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.2vw;
     transition: all 0.3s ease;
 }
 
@@ -77,27 +78,9 @@ h2 {
     opacity: 0.9;
 }
 
-@media (max-width: 480px) {
-    .login-container {
-        padding: 20px;
-        width: 90%;
-    }
-
-    h2 {
-        font-size: 20px;
-    }
-
-    .form-container input,
-    .form-container button,
-    .oauth-button {
-        font-size: 14px;
-        padding: 10px;
-    }
-}
-
 .signup-link {
-    margin-top: 10px;
-    font-size: 14px;
+    margin-top: 1vw;
+    font-size: 1.2vw;
     color: #555;
 }
 
@@ -125,20 +108,19 @@ h2 {
 
 .popup-content {
     background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 400px;
+    padding: 2vw;
+    border-radius: 0.8vw;
+    width: 20vw;
+    max-height: 40vh;
     position: relative;
 }
 
 .close-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 1vw;
+    right: 1vw;
     background: none;
     border: none;
-    font-size: 20px;
+    font-size: 1.5vw;
     cursor: pointer;
 }
-
-

@@ -17,9 +17,13 @@ const Header: React.FC = () => {
         navigate('/', { replace: true });
     };
 
+    const handleHome = () => {
+        navigate('/');
+    }
+
     return (
         <header className="header">
-            <div className="header-title">Payment</div>
+            <div className="header-title" onClick={handleHome}>Payment</div>
             <div className="header-buttons">
                 {userEmail ? (
                     <>

@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {UserRole} from "./roles";
 
 const initialState = {
     isAuthenticated: false,
     accessToken: null,
     refreshToken: null,
     userEmail: '',
+    userRole: UserRole.GUEST
 };
 
 const authSlice = createSlice({
@@ -16,12 +18,14 @@ const authSlice = createSlice({
             state.accessToken = action.payload.accessToken;
             state.refreshToken = action.payload.refreshToken;
             state.userEmail = action.payload.userEmail;
+            state.userRole = action.payload.userRole;
         },
         logout: (state) => {
             state.isAuthenticated = false;
             state.accessToken = null;
             state.refreshToken = null;
-            state.userEmail = '';
+            state.userEmail = null;
+            state.userRole = UserRole.GUEST;
         },
     },
 });

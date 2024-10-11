@@ -10,6 +10,7 @@
     font-size: 1.2vw;
     font-weight: bold;
     color: #343a40;
+    cursor: pointer;
 }
 
 .header-buttons {
