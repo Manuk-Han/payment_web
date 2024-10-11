@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import {useLocation, useNavigate} from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../redux/authSlice';
 
 const HomePage = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
@@ -11,12 +14,10 @@ const HomePage = () => {
         const refreshToken = params.get('refreshToken');
 
         if (accessToken && refreshToken) {
-            document.cookie = `Authorization=${accessToken}; path=/; secure; samesite=strict`;
-            document.cookie = `refreshToken=${refreshToken}; path=/; secure; samesite=strict`;
-
+            dispatch(setCredentials({ accessToken, refreshToken }));
             navigate(location.pathname, { replace: true });
         }
-    }, [location]);
+    }, [location, dispatch, navigate]);
 
     return (
         <div>

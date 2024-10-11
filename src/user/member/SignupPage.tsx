@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './css/LoginPage.css';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../../redux/authSlice';
+import axiosInstance from '../../../axiosInstance';
 
 interface SignupPageProps {
     closePopup: () => void;
@@ -15,6 +18,7 @@ interface SignUpForm {
 
 const SignupPage: React.FC<SignupPageProps> = ({ closePopup, setLoginEmail, setIsSignupOpen }) => {
     const [signUpForm, setSignUpForm] = useState<SignUpForm>({ name: '', email: '', password: '' });
+    const dispatch = useDispatch();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -23,15 +27,16 @@ const SignupPage: React.FC<SignupPageProps> = ({ closePopup, setLoginEmail, setI
 
     const handleFormSubmit = async () => {
         try {
-            const response = await fetch('http://localhost:8080/member/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(signUpForm),
-            });
+            const response = await axiosInstance.post('/member/signup', signUpForm);
 
-            if (response.ok) {
+            if (response.status === 200) {
+                const authToken = response.headers['authorization'];
+                const refreshToken = response.data;
+
+                if (authToken && refreshToken) {
+                    dispatch(setCredentials({ accessToken: authToken, refreshToken, userEmail: signUpForm.email }));
+                }
+
                 console.log('회원가입 성공');
                 setLoginEmail(signUpForm.email);
                 setIsSignupOpen(false);

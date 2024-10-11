@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import './css/LoginPage.css';
 import SignupPage from './SignupPage';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../../redux/authSlice';
+import axiosInstance from '../../../axiosInstance';
 
 interface SignInForm {
     email: string;
@@ -14,6 +17,7 @@ const LoginPage: React.FC = () => {
     const [signInForm, setSignInForm] = useState<SignInForm>({ email: '', password: '' });
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleOAuthLogin = (provider: string) => {
         window.location.href = `http://localhost:8080/oauth2/authorization/${provider}`;
@@ -26,24 +30,17 @@ const LoginPage: React.FC = () => {
 
     const handleFormSubmit = async () => {
         try {
-            const response = await fetch('http://localhost:8080/member/signIn', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(signInForm),
-            });
+            const response = await axiosInstance.post('/member/signIn', signInForm);
 
-            if (response.ok) {
-                const authToken = response.headers.get('Authorization');
-                const data = await response.text();
+            if (response.status === 200) {
+                const authToken = response.headers['authorization'];
+                const refreshToken = response.data;
 
-                if (authToken) {
-                    document.cookie = `Authorization=${authToken}; path=/; secure; samesite=strict`;
-                    document.cookie = `refreshToken=${data}; path=/; secure; samesite=strict`;
+                if (authToken && refreshToken) {
+                    dispatch(setCredentials({ accessToken: authToken, refreshToken, userEmail: signInForm.email }));
                 }
 
-                navigate('/home', { replace: true })
+                navigate('/home', { replace: true });
             } else {
                 console.log('로그인 실패');
             }
