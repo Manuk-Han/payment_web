@@ -1,0 +1,48 @@
+.header-component {
+    display: flex;
+    height: 3%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vw 2vw;
+    background-color: #f8f9fa;
+    box-shadow: 0 0.8vw 1.6vw rgba(0, 0, 0, 0.1);
+}
+
+.header-tabs {
+    display: flex;
+}
+
+.header-tab {
+    background: none;
+    border: none;
+    font-size: 1.2vw;
+    padding: 1vw;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.header-tab:hover {
+    color: #007bff;
+}
+
+.header-tab.active {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+}
+
+.header-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.icon-image {
+    width: 2vw;
+    height: 2vw;
+}

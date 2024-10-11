@@ -37,10 +37,13 @@ const LoginPage: React.FC = () => {
                 const refreshToken = response.data;
 
                 if (authToken && refreshToken) {
+                    localStorage.setItem('accessToken', authToken);
+                    localStorage.setItem('refreshToken', refreshToken);
+
                     dispatch(setCredentials({ accessToken: authToken, refreshToken, userEmail: signInForm.email }));
                 }
 
-                navigate('/home', { replace: true });
+                navigate('/', { replace: true });
             } else {
                 console.log('로그인 실패');
             }

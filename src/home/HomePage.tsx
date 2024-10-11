@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCredentials, logout } from '../redux/authSlice';
-import { RootState } from '../redux/store';
+import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../redux/authSlice';
 import { jwtDecode } from 'jwt-decode';
 import './css/HomePage.css';
 import Header from './Header';
 import Footer from './Footer';
 import Dashboard from "../content/Dashboard";
-import {UserRole} from "../redux/roles";
+import HeaderComponent from "../content/HeaderComponent";
+import { UserRole } from '../redux/roles';
+import { PageTabs } from '../redux/Tabs';
 
 interface DecodedToken {
     user_id?: string;
+    role?: string;
     [key: string]: any;
 }
 
 const HomePage = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const userEmail = useSelector((state: RootState) => state.auth.userEmail);
-    const [hasNavigated, setHasNavigated] = useState(false);
+    const location = useLocation();
+    const [selectedTab, setSelectedTab] = useState<PageTabs>(PageTabs.PRODUCT);
+
+    const handleTabChange = (tab: PageTabs) => {
+        setSelectedTab(tab);
+    };
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
@@ -32,7 +36,7 @@ const HomePage = () => {
             refreshToken = localStorage.getItem('refreshToken');
         }
 
-        if (accessToken && refreshToken && !hasNavigated) {
+        if (accessToken && refreshToken) {
             try {
                 const token = accessToken.replace('Bearer ', '');
                 const decodedToken: DecodedToken = jwtDecode(token);
@@ -41,28 +45,19 @@ const HomePage = () => {
 
                 localStorage.setItem('accessToken', accessToken);
                 localStorage.setItem('refreshToken', refreshToken);
-
-                dispatch(setCredentials({ accessToken, refreshToken, userEmail: email, userRole : role }));
-                setHasNavigated(true);
+                dispatch(setCredentials({ accessToken, refreshToken, userEmail: email, userRole: role }));
             } catch (error) {
                 console.error('Invalid token:', error);
             }
-            navigate(location.pathname, { replace: true });
         }
-    }, [location, dispatch, navigate, hasNavigated]);
-
-    const handleLogout = () => {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        dispatch(logout());
-        navigate('/', { replace: true });
-    };
+    }, [dispatch, location]);
 
     return (
         <div className="page-container">
             <Header />
             <div className="content">
-                <Dashboard />
+                <HeaderComponent onTabChange={handleTabChange} />
+                <Dashboard selectedTab={selectedTab} />
             </div>
             <Footer />
         </div>
