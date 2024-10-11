@@ -1,0 +1,38 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1%;
+    background-color: #f8f9fa;
+}
+
+.header-title {
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.header-buttons button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.4vw;
+    padding: 0.8vw 1.2vw;
+    margin-left: 2vw;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.header-buttons button:hover {
+    background-color: #0056b3;
+}
+
+.header-user {
+    font-size: 0.8vw;
+    margin-right: 1vw;
+}

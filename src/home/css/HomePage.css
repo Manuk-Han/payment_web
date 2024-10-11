@@ -1,0 +1,23 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    height: 2%;
+}
+
+.footer {
+    height: 1%;
+}
+
+.content {
+    height: 96.5%;
+    margin-top: 0.25%;
+    margin-bottom: 0.25%;
+    flex: 1;
+    background-color: #f1f3f5;
+    padding: 1%;
+}
+

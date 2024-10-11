@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCredentials } from '../redux/authSlice';
+import { setCredentials, logout } from '../redux/authSlice';
 import { RootState } from '../redux/store';
 import { jwtDecode } from 'jwt-decode';
+import './css/HomePage.css';
+import Header from './Header';
+import Footer from './Footer';
 
 interface DecodedToken {
     user_id?: string;
@@ -44,13 +47,12 @@ const HomePage = () => {
     }, [location, dispatch, navigate]);
 
     return (
-        <div>
-            <header>
-                <div style={{ float: 'right', margin: '10px' }}>
-                    {userEmail ? `환영합니다, ${userEmail}님!` : '로그인되지 않음'}
-                </div>
-            </header>
-            <h2>Home</h2>
+        <div className="page-container">
+            <Header />
+            <div className="content">
+                <h2>Home</h2>
+            </div>
+            <Footer />
         </div>
     );
 };
