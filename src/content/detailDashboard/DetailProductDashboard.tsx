@@ -7,7 +7,7 @@ interface ProductProps {
 const DetailProductDashboard: React.FC<ProductProps> = ({ id }) => {
     return (
         <div>
-            {id}
+
         </div>
     );
 };

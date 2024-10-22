@@ -12,7 +12,6 @@ interface DashboardProps {
 const DetailDashboard: React.FC<DashboardProps> = ({ selectedTab, id }) => {
     return (
         <div className="dashboard">
-            1234
             {selectedTab === PageTabs.PRODUCT && <DetailProductDashboard id={id}/>}
             {selectedTab === PageTabs.PRICE && <DetailPriceDashboard id={id}/>}
         </div>
