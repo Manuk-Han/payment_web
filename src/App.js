@@ -5,6 +5,7 @@ import HomePage from './home/HomePage';
 import SignupPage from './user/member/SignupPage';
 import HomeDetailPage from "./home/HomeDetailPage";
 import {PageTabs} from "./redux/Tabs";
+import Payment from "./content/payment/Payment";
 
 const App = () => {
     return (
@@ -15,6 +16,7 @@ const App = () => {
                 <Route path="/price" element={<HomePage nowTab={PageTabs.PRICE} />} />
                 <Route path="/sign-in" element={<LoginPage />} />
                 <Route path="/product/:id" element={<HomeDetailPage />} />
+                <Route path="/payment/:id" element={<Payment />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </Router>
