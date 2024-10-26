@@ -1,35 +1,37 @@
-import React, {useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import axiosInstance from '../../config/axiosInstance';
 import '../css/DetailProductDashboard.css';
 
 interface ProductProps {
     id: number;
 }
 
-interface ProductDetail {
+interface ProductDetail { 
     productId: number;
     name: string;
     price: number;
     stockQuantity: number;
 }
 
-const DetailProductDashboard: React.FC<ProductProps> = ({id}) => {
+const DetailProductDashboard: React.FC<ProductProps> = ({ id }) => {
     const [productDetail, setProductDetail] = useState<ProductDetail | null>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:8080/product/detail/' + id)
-            .then(response => response.json())
-            .then(data => {
-                setProductDetail(data);
+        axiosInstance.get(`/product/detail/${id}`)
+            .then(response => {
+                setProductDetail(response.data);
             })
             .catch(error => {
-                console.error(error);
+                console.error("Failed to fetch product details:", error);
             });
     }, [id]);
 
-    const handleBuyClick = (productId) => {
-        navigate('/payment/' + productId);
+    const handleBuyClick = (productId: number) => {
+        if (productId) {
+            navigate(`/payment/${productId}`);
+        }
     };
 
     return (
@@ -44,7 +46,13 @@ const DetailProductDashboard: React.FC<ProductProps> = ({id}) => {
             ) : (
                 <p>Loading product details...</p>
             )}
-            <button className="buy-button" onClick={() => handleBuyClick(productDetail.productId)}>Buy</button>
+            <button
+                className="buy-button"
+                onClick={() => productDetail && handleBuyClick(productDetail.productId)}
+                disabled={!productDetail}
+            >
+                Buy
+            </button>
         </div>
     );
 };
