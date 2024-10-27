@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
 import { useLocation } from "react-router-dom";
+import axios from 'axios';
+import Header from '../../home/Header';
+import Footer from '../../home/Footer';
+import '../css/Payment.css';
 
 interface PayUrl {
     next_redirect_pc_url: string;
@@ -15,8 +18,9 @@ const Payment: React.FC = () => {
 
     useEffect(() => {
         if (location.state) {
-            const { quantity } = location.state as { quantity: number };
+            const { quantity, productId } = location.state as { quantity: number; productId: number };
             setQuantity(quantity);
+            setProductId(productId);
         }
     }, [location.state]);
 
@@ -45,25 +49,29 @@ const Payment: React.FC = () => {
     };
 
     return (
-        <div className="payment-container">
-            <div className="payment-info">
-                <label htmlFor="quantity">상품 개수:</label>
-                <input
-                    type="number"
-                    id="quantity"
-                    value={quantity}
-                    min="1"
-                    onChange={(e) => setQuantity(Number(e.target.value))}
-                />
+        <div className="payment-page">
+            <Header />
+            <div className="payment-container">
+                <div className="payment-info">
+                    <label htmlFor="quantity">상품 개수:</label>
+                    <input
+                        type="number"
+                        id="quantity"
+                        value={quantity}
+                        min="1"
+                        onChange={(e) => setQuantity(Number(e.target.value))}
+                    />
+                </div>
+                <div className="payment-action">
+                    <button onClick={handlePayment1m}>결제 요청</button>
+                    {payUrl && (
+                        <a href={payUrl} target="_blank" rel="noopener noreferrer">
+                            결제 페이지로 이동
+                        </a>
+                    )}
+                </div>
             </div>
-            <div className="payment-action">
-                <button onClick={handlePayment1m}>결제 요청</button>
-                {payUrl && (
-                    <a href={payUrl} target="_blank" rel="noopener noreferrer">
-                        결제 페이지로 이동
-                    </a>
-                )}
-            </div>
+            <Footer />
         </div>
     );
 };

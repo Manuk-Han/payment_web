@@ -1,0 +1,88 @@
+.payment-container {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 5%;
+    max-width: 90%;
+    margin: 5% auto;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.payment-info {
+    margin-bottom: 5%;
+}
+
+.payment-info label {
+    font-size: 1.5vw;
+    color: #333;
+    display: block;
+    margin-bottom: 2%;
+}
+
+.payment-info input {
+    width: 100%;
+    padding: 2%;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 1.2vw;
+    background-color: #f9f9f9;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.payment-action {
+    text-align: center;
+    margin-top: 5%;
+}
+
+.payment-action button {
+    width: 100%;
+    padding: 3%;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.8vw;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.payment-action button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.payment-action button:active {
+    background-color: #1e7e34;
+    transform: translateY(0);
+}
+
+.payment-action button:focus {
+    outline: none;
+}
+
+.payment-action a {
+    display: inline-block;
+    margin-top: 3%;
+    padding: 3% 5%;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.payment-action a:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.payment-action a:focus {
+    outline: none;
+}
+
+.payment-action a:active {
+    background-color: #004080;
+    transform: translateY(0);
+}
