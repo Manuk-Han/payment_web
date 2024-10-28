@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import Header from '../../home/Header';
 import Footer from '../../home/Footer';
@@ -16,26 +15,25 @@ interface Product {
     price: number;
 }
 
-const Payment: React.FC = () => {
-    const location = useLocation();
+interface PaymentProps {
+    productId: number | null;
+    quantity: number;
+}
+
+const Payment: React.FC<PaymentProps> = ({ productId, quantity }) => {
     const [payUrl, setPayUrl] = useState<string | null>(null);
-    const [quantity, setQuantity] = useState<number>(1);
-    const [productId, setProductId] = useState<number | null>(null);
     const [product, setProduct] = useState<Product | null>(null);
     const [totalPrice, setTotalPrice] = useState<number>(0);
 
     useEffect(() => {
-        if (location.state) {
-            const { quantity, productId } = location.state as { quantity: number; productId: number };
-            setQuantity(quantity);
-            setProductId(productId);
-            fetchProductInfo(productId);
+        if (productId) {
+            fetchProductInfo(productId, quantity);
         }
-    }, [location.state]);
+    }, [productId, quantity]);
 
-    const fetchProductInfo = async (productId: number) => {
+    const fetchProductInfo = async (productId: number, quantity: number) => {
         try {
-            const response = await axios.get<Product>(`/product/${productId}`);
+            const response = await axios.get<Product>(`http://localhost:8080/product/${productId}`);
             setProduct(response.data);
             setTotalPrice(response.data.price * quantity);
         } catch (error) {
@@ -46,7 +44,7 @@ const Payment: React.FC = () => {
     const handlePayment1m = async () => {
         if (productId) {
             try {
-                const response = await axios.post<PayUrl>('/payment', {
+                const response = await axios.post<PayUrl>('http://localhost:8080/payment', {
                     quantity: quantity,
                     productId: productId,
                 });
@@ -80,7 +78,6 @@ const Payment: React.FC = () => {
                         min="1"
                         onChange={(e) => {
                             const newQuantity = Number(e.target.value);
-                            setQuantity(newQuantity);
                             if (product) {
                                 setTotalPrice(product.price * newQuantity);
                             }

@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
+interface ProductDashboardProps {
+    onGoToPayment?: (id: number, qty: number) => void;
+}
+
 interface Product {
     productId: number;
     name: string;
 }
 
-const ProductDashboard: React.FC = () => {
+const ProductDashboard: React.FC<ProductDashboardProps> = ({ onGoToPayment }) => {
     const [products, setProducts] = useState<Product[]>([]);
-
     const navigate = useNavigate();
 
     const handleProductClick = (productId: number) => {
-        navigate(`/product/${productId}`);
-    }
+        if (onGoToPayment) {
+            onGoToPayment(productId, 1);
+        } else {
+            navigate(`/product/${productId}`);
+        }
+    };
 
     useEffect(() => {
         fetch('http://localhost:8080/product/list')
             .then(response => response.json())
             .then(data => {
                 setProducts(data);
-                console.log(data)
+                console.log(data);
             })
             .catch(error => {
                 console.error(error);
@@ -33,7 +40,9 @@ const ProductDashboard: React.FC = () => {
             <ul className="product-list">
                 {products.map(product => (
                     <li key={product.productId} className="product-item">
-                        <div onClick={() => handleProductClick(product.productId)}>{product.name}</div>
+                        <div onClick={() => handleProductClick(product.productId)}>
+                            {product.name}
+                        </div>
                     </li>
                 ))}
             </ul>

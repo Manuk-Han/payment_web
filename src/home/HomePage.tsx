@@ -1,8 +1,5 @@
-// Payment 컴포넌트에 대하여 HomePage에서 렌더링되도록 설정
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setCredentials } from '../redux/authSlice';
+import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import Dashboard from "../content/dashboard/Dashboard";
@@ -16,12 +13,18 @@ interface HomePageProps {
 
 const HomePage: React.FC<HomePageProps> = ({ nowTab = PageTabs.PRODUCT }) => {
     const [selectedTab, setSelectedTab] = useState<PageTabs>(nowTab);
+    const [productId, setProductId] = useState<number | null>(null);
+    const [quantity, setQuantity] = useState<number>(1);
     const location = useLocation();
-    const dispatch = useDispatch();
 
     const handleTabChange = (tab: PageTabs) => {
         setSelectedTab(tab);
         window.history.pushState(null, '', tab);
+    };
+
+    const handleGoToPayment = (id: number, qty: number) => {
+        setProductId(id);
+        setQuantity(qty);
     };
 
     useEffect(() => {
@@ -36,9 +39,9 @@ const HomePage: React.FC<HomePageProps> = ({ nowTab = PageTabs.PRODUCT }) => {
             <div className="content">
                 <HeaderComponent tab={selectedTab} onTabChange={handleTabChange} />
                 {location.pathname.includes('/payment') ? (
-                    <Payment />
+                    <Payment productId={productId} quantity={quantity} />
                 ) : (
-                    <Dashboard selectedTab={selectedTab} />
+                    <Dashboard selectedTab={selectedTab} onGoToPayment={handleGoToPayment} />
                 )}
             </div>
             <Footer />

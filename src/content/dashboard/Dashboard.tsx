@@ -6,15 +6,17 @@ import '../css/Dashboard.css';
 
 interface DashboardProps {
     selectedTab: string;
+    onGoToPayment?: (id: number, qty: number) => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ selectedTab }) => {
+const Dashboard: React.FC<DashboardProps> = ({ selectedTab, onGoToPayment }) => {
     return (
         <div className="dashboard">
-            {selectedTab === PageTabs.PRODUCT && <ProductDashboard />}
+            {selectedTab === PageTabs.PRODUCT && <ProductDashboard onGoToPayment={onGoToPayment} />}
             {selectedTab === PageTabs.PRICE && <PriceDashboard />}
         </div>
     );
 };
 
 export default Dashboard;
+
