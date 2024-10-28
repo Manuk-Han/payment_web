@@ -5,11 +5,6 @@ import Header from '../../home/Header';
 import Footer from '../../home/Footer';
 import '../css/Payment.css';
 
-interface PayUrl {
-    next_redirect_pc_url: string;
-    tid: string;
-}
-
 const Payment: React.FC = () => {
     const location = useLocation();
     const [payUrl, setPayUrl] = useState<string | null>(null);
@@ -27,16 +22,13 @@ const Payment: React.FC = () => {
     const handlePayment1m = async () => {
         if (productId) {
             try {
-                const response = await axios.post<PayUrl>('http://localhost:8080/payment', {
+                const response = await axios.post('http://localhost:8080/payment', {
                     quantity: quantity,
                     productId: productId,
                 });
 
                 const { next_redirect_pc_url, tid } = response.data;
-
                 console.log("결제 URL:", next_redirect_pc_url);
-                console.log("결제 고유 번호(TID):", tid);
-
                 window.localStorage.setItem("tid", tid);
                 setPayUrl(next_redirect_pc_url);
 
