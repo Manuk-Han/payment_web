@@ -35,7 +35,7 @@ const Payment: React.FC = () => {
 
     const fetchProductInfo = async (productId: number) => {
         try {
-            const response = await axios.get<Product>(`http://localhost:8080/product/${productId}`);
+            const response = await axios.get<Product>(`/product/${productId}`);
             setProduct(response.data);
             setTotalPrice(response.data.price * quantity);
         } catch (error) {
@@ -46,7 +46,7 @@ const Payment: React.FC = () => {
     const handlePayment1m = async () => {
         if (productId) {
             try {
-                const response = await axios.post<PayUrl>('http://localhost:8080/payment', {
+                const response = await axios.post<PayUrl>('/payment', {
                     quantity: quantity,
                     productId: productId,
                 });

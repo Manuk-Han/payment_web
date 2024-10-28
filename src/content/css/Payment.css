@@ -1,50 +1,63 @@
 .payment-container {
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 40px;
-    max-width: 600px;
-    margin: 50px auto;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 5%;
+    max-width: 80vw; /* 화면 너비의 80% */
+    margin: 5% auto;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .payment-info {
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5%;
 }
 
 .payment-info label {
-    font-size: 1.1rem;
-    color: #444;
-    display: block;
-    margin-bottom: 8px;
+    font-size: 1.5vw;
+    color: #333;
+    flex: 1;
 }
 
 .payment-info input {
-    width: 100%;
-    padding: 10px;
+    width: 20%;
+    padding: 1.5%;
     border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    background-color: #f0f0f0;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #ddd;
+    font-size: 1.2vw;
+    background-color: #f9f9f9;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+.payment-info input:focus {
+    border-color: #007bff;
+}
+
+.payment-summary {
+    font-size: 1.2vw;
+    text-align: left;
+    padding: 2% 0;
 }
 
 .payment-action {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 5%;
 }
 
 .payment-action button {
-    width: auto;
-    padding: 12px 30px;
+    width: 80%;
+    padding: 2%;
     background-color: #28a745;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.8vw;
     transition: background-color 0.3s ease, transform 0.2s ease;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .payment-action button:hover {
@@ -52,37 +65,19 @@
     transform: translateY(-2px);
 }
 
-.payment-action button:active {
-    background-color: #1e7e34;
-    transform: translateY(0);
-}
-
-.payment-action button:focus {
-    outline: none;
-}
-
 .payment-action a {
     display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
+    margin-top: 3%;
+    padding: 2% 4%;
     background-color: #007bff;
     color: white;
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 8px;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .payment-action a:hover {
     background-color: #0056b3;
     transform: translateY(-2px);
-}
-
-.payment-action a:focus {
-    outline: none;
-}
-
-.payment-action a:active {
-    background-color: #004080;
-    transform: translateY(0);
 }
