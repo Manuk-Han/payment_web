@@ -1,33 +1,42 @@
 .payment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #f8f9fa;
-    border-radius: 8px;
-    padding: 5%;
-    max-width: 80vw; /* 화면 너비의 80% */
+    border-radius: 10px;
+    padding: 3%;
+    max-width: 50%;
     margin: 5% auto;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .payment-info {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 5%;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 3%;
+    background-color: #ffffff;
+    padding: 4%;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .payment-info label {
-    font-size: 1.5vw;
+    font-size: 1.3vw;
     color: #333;
-    flex: 1;
+    margin-bottom: 1.5%;
+    text-align: left;
 }
 
 .payment-info input {
-    width: 20%;
-    padding: 1.5%;
+    width: 100%;
+    padding: 8px;
     border-radius: 6px;
     border: 1px solid #ddd;
     font-size: 1.2vw;
     background-color: #f9f9f9;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-top: 5px;
     transition: border-color 0.3s ease;
 }
 
@@ -36,43 +45,51 @@
 }
 
 .payment-summary {
-    font-size: 1.2vw;
+    font-size: 1.1vw;
     text-align: left;
-    padding: 2% 0;
+    width: 100%;
+    margin-top: 2%;
+    background-color: #ffffff;
+    padding: 3%;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .payment-action {
     text-align: center;
-    margin-top: 5%;
+    width: 100%;
+    margin-top: 4%;
 }
 
 .payment-action button {
-    width: 80%;
-    padding: 2%;
-    background-color: #28a745;
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 1.8vw;
+    font-size: 1.5vw;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .payment-action button:hover {
-    background-color: #218838;
+    background-color: #0056b3;
     transform: translateY(-2px);
 }
 
 .payment-action a {
     display: inline-block;
+    width: 100%;
     margin-top: 3%;
-    padding: 2% 4%;
+    padding: 12px;
     background-color: #007bff;
     color: white;
+    text-align: center;
     text-decoration: none;
     border-radius: 8px;
+    font-size: 1.2vw;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
