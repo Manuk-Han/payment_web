@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import axios from 'axios';
 import Header from '../../home/Header';
 import Footer from '../../home/Footer';
@@ -13,27 +14,27 @@ interface Product {
     id: number;
     name: string;
     price: number;
+    stockQuantity: number;
 }
 
-interface PaymentProps {
-    productId: number | null;
-    quantity: number;
-}
-
-const Payment: React.FC<PaymentProps> = ({ productId, quantity }) => {
+const Payment: React.FC = () => {
+    const { productId } = useParams<{ productId: string }>();
+    const location = useLocation();
+    const initialQuantity = location.state?.quantity || 1;
     const [payUrl, setPayUrl] = useState<string | null>(null);
     const [product, setProduct] = useState<Product | null>(null);
+    const [quantity, setQuantity] = useState<number>(initialQuantity); // initialQuantity를 초기값으로 설정
     const [totalPrice, setTotalPrice] = useState<number>(0);
 
     useEffect(() => {
         if (productId) {
-            fetchProductInfo(productId, quantity);
+            fetchProductInfo(Number(productId));
         }
-    }, [productId, quantity]);
+    }, [productId]);
 
-    const fetchProductInfo = async (productId: number, quantity: number) => {
+    const fetchProductInfo = async (productId: number) => {
         try {
-            const response = await axios.get<Product>(`http://localhost:8080/product/${productId}`);
+            const response = await axios.get<Product>(`/product/detail/${productId}`);
             setProduct(response.data);
             setTotalPrice(response.data.price * quantity);
         } catch (error) {
@@ -41,18 +42,15 @@ const Payment: React.FC<PaymentProps> = ({ productId, quantity }) => {
         }
     };
 
-    const handlePayment1m = async () => {
+    const handlePayment = async () => {
         if (productId) {
             try {
-                const response = await axios.post<PayUrl>('http://localhost:8080/payment', {
+                const response = await axios.post<PayUrl>('/payment', {
                     quantity: quantity,
-                    productId: productId,
+                    productId: Number(productId),
                 });
 
                 const { next_redirect_pc_url, tid } = response.data;
-
-                console.log("결제 URL:", next_redirect_pc_url);
-                console.log("결제 고유 번호(TID):", tid);
 
                 window.localStorage.setItem("tid", tid);
                 setPayUrl(next_redirect_pc_url);
@@ -62,6 +60,14 @@ const Payment: React.FC<PaymentProps> = ({ productId, quantity }) => {
             }
         } else {
             console.error("유효한 제품 ID가 없습니다.");
+        }
+    };
+
+    const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newQuantity = Math.min(Number(e.target.value), product?.stockQuantity || 1);
+        setQuantity(newQuantity);
+        if (product) {
+            setTotalPrice(product.price * newQuantity);
         }
     };
 
@@ -76,12 +82,8 @@ const Payment: React.FC<PaymentProps> = ({ productId, quantity }) => {
                         id="quantity"
                         value={quantity}
                         min="1"
-                        onChange={(e) => {
-                            const newQuantity = Number(e.target.value);
-                            if (product) {
-                                setTotalPrice(product.price * newQuantity);
-                            }
-                        }}
+                        max={product ? product.stockQuantity : 1}
+                        onChange={handleQuantityChange}
                     />
                 </div>
                 {product && (
@@ -92,7 +94,7 @@ const Payment: React.FC<PaymentProps> = ({ productId, quantity }) => {
                     </div>
                 )}
                 <div className="payment-action">
-                    <button onClick={handlePayment1m}>결제 요청</button>
+                    <button onClick={handlePayment}>결제 요청</button>
                     {payUrl && (
                         <a href={payUrl} target="_blank" rel="noopener noreferrer">
                             결제 페이지로 이동

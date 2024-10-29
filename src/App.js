@@ -16,7 +16,7 @@ const App = () => {
                 <Route path="/price" element={<HomePage nowTab={PageTabs.PRICE} />} />
                 <Route path="/sign-in" element={<LoginPage />} />
                 <Route path="/product/:id" element={<HomeDetailPage />} />
-                <Route path="/payment/:id" element={<Payment />} />
+                <Route path="/payment/:productId" element={<Payment />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </Router>

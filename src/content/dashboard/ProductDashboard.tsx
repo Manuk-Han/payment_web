@@ -15,11 +15,7 @@ const ProductDashboard: React.FC<ProductDashboardProps> = ({ onGoToPayment }) =>
     const navigate = useNavigate();
 
     const handleProductClick = (productId: number) => {
-        if (onGoToPayment) {
-            onGoToPayment(productId, 1);
-        } else {
-            navigate(`/product/${productId}`);
-        }
+        navigate(`/product/${productId}`);
     };
 
     useEffect(() => {
