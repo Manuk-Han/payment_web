@@ -6,6 +6,7 @@ import SignupPage from './user/member/SignupPage';
 import HomeDetailPage from "./home/HomeDetailPage";
 import {PageTabs} from "./redux/Tabs";
 import Payment from "./content/payment/Payment";
+import OAuth2RedirectHandler from "./user/member/OAuth2RedirectHandler";
 
 const App = () => {
     return (
@@ -15,6 +16,7 @@ const App = () => {
                 <Route path="/product" element={<HomePage nowTab={PageTabs.PRODUCT} />} />
                 <Route path="/price" element={<HomePage nowTab={PageTabs.PRICE} />} />
                 <Route path="/sign-in" element={<LoginPage />} />
+                <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
                 <Route path="/product/:id" element={<HomeDetailPage />} />
                 <Route path="/payment/:productId" element={<Payment />} />
                 <Route path="*" element={<Navigate to="/" />} />

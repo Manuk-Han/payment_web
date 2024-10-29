@@ -32,6 +32,8 @@ const LoginPage: React.FC = () => {
         try {
             const response = await axiosInstance.post('/member/signIn', signInForm);
 
+            console.log(response)
+
             if (response.status === 200) {
                 const authToken = response.headers['authorization'];
                 const refreshToken = response.data;

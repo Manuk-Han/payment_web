@@ -43,23 +43,30 @@ const Payment: React.FC = () => {
     };
 
     const handlePayment = async () => {
-        if (productId) {
-            try {
-                const response = await axios.post<PayUrl>('/payment', {
+        try {
+            const token = localStorage.getItem("Authorization");
+            console.log(token)
+
+            const response = await axios.post(
+                '/payment/kakaoPayReady',
+                {
                     quantity: quantity,
                     productId: Number(productId),
-                });
+                },
+                {
+                    headers: {
+                        Authorization: token,
+                    },
+                }
+            );
 
-                const { next_redirect_pc_url, tid } = response.data;
+            const { next_redirect_pc_url, tid } = response.data;
 
-                window.localStorage.setItem("tid", tid);
-                setPayUrl(next_redirect_pc_url);
+            window.localStorage.setItem("tid", tid);
+            setPayUrl(next_redirect_pc_url);
 
-            } catch (error) {
-                console.error("결제 준비 중 에러 발생:", error);
-            }
-        } else {
-            console.error("유효한 제품 ID가 없습니다.");
+        } catch (error) {
+            console.error("결제 준비 중 에러 발생:", error);
         }
     };
 
