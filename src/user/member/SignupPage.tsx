@@ -6,7 +6,7 @@ import axiosInstance from '../../config/axiosInstance';
 
 interface SignupPageProps {
     closePopup: () => void;
-    setLoginEmail: React.Dispatch<React.SetStateAction<string>>;
+    setUserName: React.Dispatch<React.SetStateAction<string>>;
     setIsSignupOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -16,7 +16,7 @@ interface SignUpForm {
     password: string;
 }
 
-const SignupPage: React.FC<SignupPageProps> = ({ closePopup, setLoginEmail, setIsSignupOpen }) => {
+const SignupPage: React.FC<SignupPageProps> = ({ closePopup, setUserName, setIsSignupOpen }) => {
     const [signUpForm, setSignUpForm] = useState<SignUpForm>({ name: '', email: '', password: '' });
     const dispatch = useDispatch();
 
@@ -34,11 +34,11 @@ const SignupPage: React.FC<SignupPageProps> = ({ closePopup, setLoginEmail, setI
                 const refreshToken = response.data;
 
                 if (authToken && refreshToken) {
-                    dispatch(setCredentials({ accessToken: authToken, refreshToken, userEmail: signUpForm.email }));
+                    dispatch(setCredentials({ accessToken: authToken, refreshToken }));
                 }
 
                 console.log('회원가입 성공');
-                setLoginEmail(signUpForm.email);
+                setUserName(signUpForm.name);
                 setIsSignupOpen(false);
             } else {
                 console.log('회원가입 실패');

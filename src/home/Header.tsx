@@ -8,7 +8,7 @@ import './css/Header.css';
 const Header: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const userEmail = useSelector((state: RootState) => state.auth.userEmail);
+    const userName = useSelector((state: RootState) => state.auth.userName);
 
     const handleLogout = () => {
         localStorage.removeItem('accessToken');
@@ -25,9 +25,9 @@ const Header: React.FC = () => {
         <header className="header">
             <div className="header-title" onClick={handleHome}>Payment</div>
             <div className="header-buttons">
-                {userEmail ? (
+                {userName ? (
                     <>
-                        <span className="header-user">{`환영합니다, ${userEmail}님!`}</span>
+                        <span className="header-user">{`환영합니다, ${userName}님!`}</span>
                         <button onClick={handleLogout}>로그아웃</button>
                     </>
                 ) : (

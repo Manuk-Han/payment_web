@@ -13,8 +13,8 @@ interface SignInForm {
 
 const LoginPage: React.FC = () => {
     const [isSignupOpen, setIsSignupOpen] = useState(false);
-    const [loginEmail, setLoginEmail] = useState('');
     const [signInForm, setSignInForm] = useState<SignInForm>({ email: '', password: '' });
+    const [userName, setUserName] = useState('');
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const LoginPage: React.FC = () => {
                     localStorage.setItem('accessToken', authToken);
                     localStorage.setItem('refreshToken', refreshToken);
 
-                    dispatch(setCredentials({ accessToken: authToken, refreshToken, userEmail: signInForm.email }));
+                    dispatch(setCredentials({ accessToken: authToken, refreshToken }));
                 }
 
                 navigate('/', { replace: true });
@@ -88,7 +88,7 @@ const LoginPage: React.FC = () => {
                 <div className="signup-popup">
                     <SignupPage
                         closePopup={() => setIsSignupOpen(false)}
-                        setLoginEmail={setLoginEmail}
+                        setUserName={setUserName}
                         setIsSignupOpen={setIsSignupOpen}
                     />
                 </div>

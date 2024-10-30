@@ -5,7 +5,7 @@ const initialState = {
     isAuthenticated: false,
     accessToken: null,
     refreshToken: null,
-    userEmail: '',
+    userName: '',
     userRole: UserRole.GUEST
 };
 
@@ -17,14 +17,14 @@ const authSlice = createSlice({
             state.isAuthenticated = true;
             state.accessToken = action.payload.accessToken;
             state.refreshToken = action.payload.refreshToken;
-            state.userEmail = action.payload.userEmail;
+            state.userName = action.payload.userName;
             state.userRole = action.payload.userRole;
         },
         logout: (state) => {
             state.isAuthenticated = false;
             state.accessToken = null;
             state.refreshToken = null;
-            state.userEmail = null;
+            state.userName = null;
             state.userRole = UserRole.GUEST;
         },
     },
