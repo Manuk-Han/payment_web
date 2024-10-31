@@ -60,7 +60,7 @@ const DetailProductDashboard: React.FC<ProductProps> = ({ id }) => {
             {productDetail ? (
                 <div className="product-details">
                     <p><strong>Name:</strong> {productDetail.name}</p>
-                    <p><strong>Price:</strong> ${productDetail.price.toFixed(2)}</p>
+                    <p><strong>Price:</strong> {productDetail.price}원</p>
                     <p><strong>Stock Remaining:</strong> {productDetail.stockQuantity} items</p>
                     <div className="quantity-control">
                         <label htmlFor="quantity">Quantity:</label>

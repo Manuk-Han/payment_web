@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from '../../home/Header';
 import Footer from '../../home/Footer';
 import '../css/Payment.css';
+import authSlice from "../../redux/authSlice";
 
 interface PayUrl {
     next_redirect_pc_url: string;
@@ -42,9 +43,9 @@ const Payment: React.FC = () => {
         }
     };
 
-    const handlePayment = async () => {
+    const handleKakaoPayment = async () => {
         try {
-            const token = localStorage.getItem("Authorization");
+            const token = localStorage.getItem("accessToken");
             console.log(token)
 
             const response = await axios.post(
@@ -101,7 +102,19 @@ const Payment: React.FC = () => {
                     </div>
                 )}
                 <div className="payment-action">
-                    <button onClick={handlePayment}>결제 요청</button>
+                    <div className="kakaoPay" onClick={handleKakaoPayment} >카카오페이</div>
+                    {payUrl && (
+                        <a href={payUrl} target="_blank" rel="noopener noreferrer">
+                            결제 페이지로 이동
+                        </a>
+                    )}
+                    <div className="normal" onClick={handleKakaoPayment}>결제 요청</div>
+                    {payUrl && (
+                        <a href={payUrl} target="_blank" rel="noopener noreferrer">
+                            결제 페이지로 이동
+                        </a>
+                    )}
+                    <div className="normal" onClick={handleKakaoPayment}>결제 요청</div>
                     {payUrl && (
                         <a href={payUrl} target="_blank" rel="noopener noreferrer">
                             결제 페이지로 이동

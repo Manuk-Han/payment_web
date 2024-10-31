@@ -59,22 +59,45 @@
     text-align: center;
     width: 100%;
     margin-top: 4%;
+    display: flex;
+    justify-content: space-between;
+    gap: 5%;
 }
 
-.payment-action button {
+.kakaoPay {
     width: 100%;
     padding: 12px;
-    background-color: #007bff;
-    color: white;
+    background-color: #ffe800;
+    color: black;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 1.5vw;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: inline-block;
 }
 
-.payment-action button:hover {
+.kakaoPay:hover {
+    background-color: #ada936;
+    transform: translateY(-2px);
+}
+
+.normal {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.5vw;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+}
+
+.normal:hover {
     background-color: #0056b3;
     transform: translateY(-2px);
 }

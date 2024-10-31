@@ -39,7 +39,7 @@ const LoginPage: React.FC = () => {
                 const accessToken = response.headers['authorization'];
                 const refreshToken = response.data;
 
-                const decodedToken = jwtDecode<{ user_id: string; role: string }>(accessToken);
+                const decodedToken = jwtDecode<{ user_id: number; user_name: string; role: string }>(accessToken);
                 console.log("Decoded Token:", decodedToken);
 
                 if (accessToken && refreshToken) {
@@ -49,7 +49,8 @@ const LoginPage: React.FC = () => {
                     dispatch(setCredentials({
                         accessToken: decodeURIComponent(accessToken),
                         refreshToken: decodeURIComponent(refreshToken),
-                        userName: decodedToken.user_id || '',
+                        userId: decodedToken.user_id || 0,
+                        userName: decodedToken.user_name || '',
                         userRole: decodedToken.role || "GUEST",
                     }));
                 }
