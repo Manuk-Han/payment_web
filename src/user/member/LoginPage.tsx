@@ -53,11 +53,11 @@ const LoginPage: React.FC = () => {
                         userName: decodedToken.user_name || '',
                         userRole: decodedToken.role || "GUEST",
                     }));
+
+                    console.log('sb', userName)
                 }
 
                 navigate('/', { replace: true });
-            } else {
-                console.log('로그인 실패');
             }
         } catch (error) {
             console.error('Error during signin:', error);

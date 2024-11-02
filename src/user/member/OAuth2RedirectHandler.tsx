@@ -13,10 +13,7 @@ const OAuth2RedirectHandler: React.FC = () => {
         const accessToken = urlParams.get('accessToken');
         const refreshToken = urlParams.get('refreshToken');
 
-        console.log("accessToken:", accessToken);
-        console.log("refreshToken:", refreshToken);
-
-        const decodedToken = jwtDecode<{ user_id: string; role: string }>(accessToken);
+        const decodedToken = jwtDecode<{ user_id: string; user_name: string; role: string }>(accessToken);
         console.log("Decoded Token:", decodedToken);
 
         if (accessToken && refreshToken) {
@@ -26,7 +23,8 @@ const OAuth2RedirectHandler: React.FC = () => {
             dispatch(setCredentials({
                 accessToken: decodeURIComponent(accessToken),
                 refreshToken: decodeURIComponent(refreshToken),
-                userName: decodedToken.user_id || '',
+                userId: decodedToken.user_id || 0,
+                userName: decodedToken.user_name || '',
                 userRole: decodedToken.role || "GUEST",
             }));
 
