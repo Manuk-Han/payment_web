@@ -4,10 +4,9 @@ import axios from 'axios';
 import Header from '../../home/Header';
 import Footer from '../../home/Footer';
 import '../css/Payment.css';
-import authSlice from "../../redux/authSlice";
 
 interface PayUrl {
-    next_redirect_pc_url: string;
+    redirectUrl: string;
     tid: string;
 }
 
@@ -19,12 +18,12 @@ interface Product {
 }
 
 const Payment: React.FC = () => {
-    const { productId } = useParams<{ productId: string }>();
+    const {productId} = useParams<{ productId: string }>();
     const location = useLocation();
     const initialQuantity = location.state?.quantity || 1;
     const [payUrl, setPayUrl] = useState<string | null>(null);
     const [product, setProduct] = useState<Product | null>(null);
-    const [quantity, setQuantity] = useState<number>(initialQuantity); // initialQuantity를 초기값으로 설정
+    const [quantity, setQuantity] = useState<number>(initialQuantity);
     const [totalPrice, setTotalPrice] = useState<number>(0);
 
     useEffect(() => {
@@ -46,7 +45,10 @@ const Payment: React.FC = () => {
     const handleKakaoPayment = async () => {
         try {
             const token = localStorage.getItem("accessToken");
-            console.log(token)
+            if (!token) {
+                console.error("Access token not found");
+                return;
+            }
 
             const response = await axios.post(
                 '/payment/kakaoPayReady',
@@ -56,20 +58,22 @@ const Payment: React.FC = () => {
                 },
                 {
                     headers: {
-                        Authorization: token,
+                        Authorization: `${token}`,
                     },
                 }
             );
 
-            const { next_redirect_pc_url, tid } = response.data;
+            console.log("결제 준비 중 응답:", response.data);
 
+            const {redirectUrl, tid} = response.data;
             window.localStorage.setItem("tid", tid);
-            setPayUrl(next_redirect_pc_url);
+            window.location.href = redirectUrl;
 
         } catch (error) {
             console.error("결제 준비 중 에러 발생:", error);
         }
     };
+
 
     const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newQuantity = Math.min(Number(e.target.value), product?.stockQuantity || 1);
@@ -81,7 +85,7 @@ const Payment: React.FC = () => {
 
     return (
         <div className="payment-page">
-            <Header />
+            <Header/>
             <div className="payment-container">
                 <div className="payment-info">
                     <label htmlFor="quantity">상품 개수:</label>
@@ -102,29 +106,17 @@ const Payment: React.FC = () => {
                     </div>
                 )}
                 <div className="payment-action">
-                    <div className="kakaoPay" onClick={handleKakaoPayment} >카카오페이</div>
-                    {payUrl && (
-                        <a href={payUrl} target="_blank" rel="noopener noreferrer">
-                            결제 페이지로 이동
-                        </a>
-                    )}
-                    <div className="normal" onClick={handleKakaoPayment}>결제 요청</div>
-                    {payUrl && (
-                        <a href={payUrl} target="_blank" rel="noopener noreferrer">
-                            결제 페이지로 이동
-                        </a>
-                    )}
-                    <div className="normal" onClick={handleKakaoPayment}>결제 요청</div>
-                    {payUrl && (
-                        <a href={payUrl} target="_blank" rel="noopener noreferrer">
-                            결제 페이지로 이동
-                        </a>
-                    )}
+                    <div className="kakaoPay" onClick={handleKakaoPayment}>
+                        카카오페이
+                    </div>
+                    <div className="normal" onClick={handleKakaoPayment}>
+                        결제 요청
+                    </div>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
         </div>
     );
-};
+}
 
 export default Payment;
