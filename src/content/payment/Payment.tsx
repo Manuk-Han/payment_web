@@ -84,7 +84,6 @@ const Payment: React.FC = () => {
 
     return (
         <div className="payment-page">
-            <Header/>
             <div className="payment-container">
                 <div className="payment-info">
                     <label htmlFor="quantity">상품 개수:</label>
@@ -113,7 +112,6 @@ const Payment: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <Footer/>
 
             <LoginModal show={showModal} onClose={() => setShowModal(false)} />
         </div>

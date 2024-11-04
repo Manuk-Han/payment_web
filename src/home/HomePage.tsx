@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from './Header';
-import Footer from './Footer';
 import Dashboard from "../content/dashboard/Dashboard";
 import HeaderComponent from "../content/HeaderComponent";
 import { PageTabs } from '../redux/Tabs';
@@ -25,12 +23,10 @@ const HomePage: React.FC<HomePageProps> = ({ nowTab = PageTabs.PRODUCT }) => {
 
     return (
         <div className="page-container">
-            <Header />
             <div className="content">
                 <HeaderComponent tab={selectedTab} onTabChange={handleTabChange} />
                 <Dashboard selectedTab={selectedTab} onGoToPayment={handleGoToPayment} />
             </div>
-            <Footer />
         </div>
     );
 };

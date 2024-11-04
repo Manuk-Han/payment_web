@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './css/HomePage.css';
-import Header from './Header';
-import Footer from './Footer';
 import HeaderComponent from "../content/HeaderComponent";
 import { PageTabs } from '../redux/Tabs';
 import {useNavigate, useParams} from "react-router-dom";
@@ -23,12 +21,10 @@ const HomeDetailPage = () => {
 
     return (
         <div className="page-container">
-            <Header />
             <div className="content">
                 <HeaderComponent tab={selectedTab} onTabChange={handleTabChange} />
                 <DetailDashboard selectedTab={selectedTab} id={numericId} />
             </div>
-            <Footer />
         </div>
     );
 };
