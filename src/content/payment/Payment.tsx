@@ -5,11 +5,6 @@ import Header from '../../home/Header';
 import Footer from '../../home/Footer';
 import '../css/Payment.css';
 
-interface PayUrl {
-    redirectUrl: string;
-    tid: string;
-}
-
 interface Product {
     id: number;
     name: string;
