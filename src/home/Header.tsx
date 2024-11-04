@@ -10,8 +10,6 @@ const Header: React.FC = () => {
     const dispatch = useDispatch();
     const userName = useSelector((state: RootState) => state.auth.userName);
 
-    console.log("Header userName:", userName)
-
     const handleLogout = () => {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');

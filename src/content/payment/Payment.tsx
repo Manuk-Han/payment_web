@@ -4,6 +4,9 @@ import axios from 'axios';
 import Header from '../../home/Header';
 import Footer from '../../home/Footer';
 import '../css/Payment.css';
+import {useSelector} from "react-redux";
+import {RootState} from "../../redux/store";
+import LoginModal from "./modal/LoginModal";
 
 interface Product {
     id: number;
@@ -16,10 +19,12 @@ const Payment: React.FC = () => {
     const {productId} = useParams<{ productId: string }>();
     const location = useLocation();
     const initialQuantity = location.state?.quantity || 1;
-    const [payUrl, setPayUrl] = useState<string | null>(null);
     const [product, setProduct] = useState<Product | null>(null);
     const [quantity, setQuantity] = useState<number>(initialQuantity);
     const [totalPrice, setTotalPrice] = useState<number>(0);
+    const [showModal, setShowModal] = useState(false);
+
+    const accessToken = useSelector((state: RootState) => state.auth.accessToken);
 
     useEffect(() => {
         if (productId) {
@@ -39,9 +44,8 @@ const Payment: React.FC = () => {
 
     const handleKakaoPayment = async () => {
         try {
-            const token = localStorage.getItem("accessToken");
-            if (!token) {
-                console.error("Access token not found");
+            if (!accessToken) {
+                setShowModal(true);
                 return;
             }
 
@@ -53,7 +57,7 @@ const Payment: React.FC = () => {
                 },
                 {
                     headers: {
-                        Authorization: `${token}`,
+                        Authorization: `${accessToken}`,
                     },
                 }
             );
@@ -110,6 +114,8 @@ const Payment: React.FC = () => {
                 </div>
             </div>
             <Footer/>
+
+            <LoginModal show={showModal} onClose={() => setShowModal(false)} />
         </div>
     );
 }
