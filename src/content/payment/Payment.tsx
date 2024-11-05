@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import axios from 'axios';
-import Header from '../../home/Header';
-import Footer from '../../home/Footer';
 import '../css/Payment.css';
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
@@ -48,6 +46,9 @@ const Payment: React.FC = () => {
                 setShowModal(true);
                 return;
             }
+
+            localStorage.setItem("productId", String(productId));
+            localStorage.setItem("quantity", String(quantity));
 
             const response = await axios.post(
                 '/payment/kakaoPayReady',

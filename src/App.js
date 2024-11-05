@@ -33,9 +33,9 @@ const App = () => {
                 <Route path="/product/:id" element={<HomeDetailPage />} />
                 <Route path="/payment/:productId" element={<Payment />} />
 
-                <Route path="/order/pay/completed" element={<PaymentSuccess />} />
-                <Route path="/order/pay/cancel" element={<PaymentCancel />} />
-                <Route path="/order/pay/fail" element={<PaymentFail />} />
+                <Route path="/payment/success" element={<PaymentSuccess />} />
+                <Route path="/payment/cancel" element={<PaymentCancel />} />
+                <Route path="/payment/fail" element={<PaymentFail />} />
 
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
