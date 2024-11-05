@@ -3,6 +3,7 @@ import axios from 'axios';
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
 import {useNavigate} from "react-router-dom";
+import axiosInstance from "../../config/axiosInstance";
 
 const PaymentSuccess = () => {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ const PaymentSuccess = () => {
             formData.append("quantity", quantity);
 
             try {
-                await axios.post('/payment/success', formData, {
+                await axiosInstance.post('/payment/success', formData, {
                     headers: {
                         Authorization: `${accessToken}`,
                         "Content-Type": "application/x-www-form-urlencoded"
@@ -37,6 +38,9 @@ const PaymentSuccess = () => {
                 localStorage.removeItem("tid");
                 localStorage.removeItem("productId");
                 localStorage.removeItem("quantity");
+
+                const url = new URL(window.location.href);
+                url.searchParams.delete("pg_token");
             } catch (error) {
                 console.error("주문 기록 중 에러 발생:", error);
                 if (error.response?.status === 401) {
