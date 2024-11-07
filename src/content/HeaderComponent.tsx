@@ -6,6 +6,7 @@ import { UserRole } from '../redux/roles';
 import { PageTabs } from '../redux/Tabs';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import {useNavigate} from "react-router-dom";
 
 interface HeaderComponentProps {
     tab?: PageTabs;
@@ -15,12 +16,19 @@ interface HeaderComponentProps {
 const HeaderComponent: React.FC<HeaderComponentProps> = ({ tab, onTabChange }) => {
     const { userRole } = useSelector((state: RootState) => state.auth);
     const [selectedTab, setSelectedTab] = useState<PageTabs>(tab);
+    const navigate = useNavigate();
 
     const handleTabClick = (tab: PageTabs) => {
         setSelectedTab(tab);
         onTabChange(tab);
         window.history.pushState(null, '', tab);
     };
+
+
+
+    const handleCart = () => {
+        navigate('/cart');
+    }
 
     return (
         <div className="header-component">
@@ -40,7 +48,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({ tab, onTabChange }) =
             </div>
             {userRole === UserRole.USER && (
                 <div className="header-icons">
-                    <button className="header-icon">
+                    <button className="header-icon" onClick={handleCart}>
                         <img src={cartIcon} alt="Cart Icon" className="icon-image" />
                     </button>
                     <button className="header-icon">

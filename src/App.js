@@ -13,6 +13,7 @@ import PaymentCancel from "./content/payment/PaymentCancel";
 import PaymentFail from "./content/payment/PaymentFail";
 import Header from "./home/Header";
 import Footer from "./home/Footer";
+import Cart from "./content/cart/Cart";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -36,6 +37,8 @@ const App = () => {
                 <Route path="/payment/success" element={<PaymentSuccess />} />
                 <Route path="/payment/cancel" element={<PaymentCancel />} />
                 <Route path="/payment/fail" element={<PaymentFail />} />
+
+                <Route path="/cart" element={<Cart />} />
 
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
