@@ -3,7 +3,8 @@ import axiosInstance from '../../config/axiosInstance';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import '../css/Cart.css';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 interface ProductDetailForm {
     productId: number;
@@ -17,6 +18,12 @@ interface CartProductForm {
     productDetailForm: ProductDetailForm;
     quantity: number;
     totalPrice: number;
+}
+
+interface CartPaymentForm {
+    cartId: number;
+    productId: number;
+    quantity: number;
 }
 
 const Cart: React.FC = () => {
@@ -83,8 +90,27 @@ const Cart: React.FC = () => {
         setDeleteTargetId(null);
     };
 
-    const handleCheckoutSelected = () => {
-        // TODO: 선택된 항목을 결제 페이지로 이동하는 로직 추가
+    const handleKakaoCartPayment = async () => {
+        try {
+            const selectedCartPaymentForms = cartItems
+                .filter(item => selectedItems.includes(item.cartId))
+                .map(item => ({
+                    cartId: item.cartId,
+                    productId: item.productDetailForm.productId,
+                    quantity: item.quantity,
+                }));
+
+            const response = await axiosInstance.post(
+                '/payment/list/kakaoPayReady', selectedCartPaymentForms
+            );
+
+            const { redirectUrl, tid } = response.data;
+            window.localStorage.setItem("tid", tid);
+            window.location.href = redirectUrl;
+
+        } catch (error) {
+            console.error("Failed to prepare multi-payment:", error);
+        }
     };
 
     return (
@@ -134,7 +160,7 @@ const Cart: React.FC = () => {
                 </table>
             )}
             <div className="cart-actions">
-                <button className="checkout-button" onClick={handleCheckoutSelected}>
+                <button className="checkout-button" onClick={handleKakaoCartPayment}>
                     결제하기
                 </button>
             </div>
