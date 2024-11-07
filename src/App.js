@@ -14,6 +14,7 @@ import PaymentFail from "./content/payment/PaymentFail";
 import Header from "./home/Header";
 import Footer from "./home/Footer";
 import Cart from "./content/cart/Cart";
+import './App.css';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -23,27 +24,31 @@ const App = () => {
     }, [dispatch]);
 
     return (
-        <Router>
-            <Header />
-            <Routes>
-                <Route path="/" element={<HomePage nowTab={PageTabs.PRODUCT} />} />
-                <Route path="/product" element={<HomePage nowTab={PageTabs.PRODUCT} />} />
-                <Route path="/price" element={<HomePage nowTab={PageTabs.PRICE} />} />
-                <Route path="/sign-in" element={<LoginPage />} />
-                <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
-                <Route path="/product/:id" element={<HomeDetailPage />} />
-                <Route path="/payment/:productId" element={<Payment />} />
+        <div className="App">
+            <Router>
+                <Header className="App-header"/>
+                <div className="App-content">
+                    <Routes>
+                        <Route path="/" element={<HomePage nowTab={PageTabs.PRODUCT} />} />
+                        <Route path="/product" element={<HomePage nowTab={PageTabs.PRODUCT} />} />
+                        <Route path="/price" element={<HomePage nowTab={PageTabs.PRICE} />} />
+                        <Route path="/sign-in" element={<LoginPage />} />
+                        <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
+                        <Route path="/product/:id" element={<HomeDetailPage />} />
+                        <Route path="/payment/:productId" element={<Payment />} />
 
-                <Route path="/payment/success" element={<PaymentSuccess />} />
-                <Route path="/payment/cancel" element={<PaymentCancel />} />
-                <Route path="/payment/fail" element={<PaymentFail />} />
+                        <Route path="/payment/success" element={<PaymentSuccess />} />
+                        <Route path="/payment/cancel" element={<PaymentCancel />} />
+                        <Route path="/payment/fail" element={<PaymentFail />} />
 
-                <Route path="/cart" element={<Cart />} />
+                        <Route path="/cart" element={<Cart />} />
 
-                <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-            <Footer />
-        </Router>
+                        <Route path="*" element={<Navigate to="/" />} />
+                    </Routes>
+                </div>
+                <Footer className="App-footer" />
+            </Router>
+        </div>
     );
 };
 
