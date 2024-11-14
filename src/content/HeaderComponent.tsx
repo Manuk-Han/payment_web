@@ -24,10 +24,12 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({ tab, onTabChange }) =
         window.history.pushState(null, '', tab);
     };
 
-
-
     const handleCart = () => {
         navigate('/cart');
+    }
+
+    const handleMyPage = () => {
+        navigate('/my-page');
     }
 
     return (
@@ -51,7 +53,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({ tab, onTabChange }) =
                     <button className="header-icon" onClick={handleCart}>
                         <img src={cartIcon} alt="Cart Icon" className="icon-image" />
                     </button>
-                    <button className="header-icon">
+                    <button className="header-icon" onClick={handleMyPage}>
                         <img src={userIcon} alt="User Icon" className="icon-image" style={{ marginRight: '0.3vw' }} />
                     </button>
                 </div>

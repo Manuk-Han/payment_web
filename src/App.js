@@ -15,6 +15,7 @@ import Header from "./content/home/Header";
 import Footer from "./content/home/Footer";
 import Cart from "./content/cart/Cart";
 import './App.css';
+import MyPage from "./content/user/member/MyPage";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const App = () => {
                         <Route path="/payment/fail" element={<PaymentFail />} />
 
                         <Route path="/cart" element={<Cart />} />
-                        <Route path="/my-page" element={<HomePage />} />
+                        <Route path="/my-page" element={<MyPage />} />
 
                         <Route path="*" element={<Navigate to="/" />} />
                     </Routes>
