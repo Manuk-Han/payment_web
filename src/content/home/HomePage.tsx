@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Dashboard from "../content/dashboard/Dashboard";
-import HeaderComponent from "../content/HeaderComponent";
-import { PageTabs } from '../redux/Tabs';
+import Dashboard from "../dashboard/Dashboard";
+import HeaderComponent from "../HeaderComponent";
+import { PageTabs } from '../../redux/Tabs';
 
 interface HomePageProps {
     nowTab?: PageTabs;

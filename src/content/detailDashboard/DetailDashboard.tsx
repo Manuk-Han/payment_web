@@ -2,7 +2,7 @@ import React from 'react';
 import DetailProductDashboard from './DetailProductDashboard';
 import DetailPriceDashboard from './DetailPriceDashboard';
 import {PageTabs} from "../../redux/Tabs";
-import '../css/Dashboard.css';
+import '../dashboard/css/Dashboard.css';
 
 interface DashboardProps {
     selectedTab: string;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import axios from 'axios';
-import '../css/Payment.css';
+import './css/Payment.css';
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
 import LoginModal from "./modal/LoginModal";

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../config/axiosInstance';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import '../css/Cart.css';
+import './css/Cart.css';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 

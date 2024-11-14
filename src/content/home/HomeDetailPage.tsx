@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './css/HomePage.css';
-import HeaderComponent from "../content/HeaderComponent";
-import { PageTabs } from '../redux/Tabs';
+import HeaderComponent from "../HeaderComponent";
+import { PageTabs } from '../../redux/Tabs';
 import {useNavigate, useParams} from "react-router-dom";
-import DetailDashboard from "../content/detailDashboard/DetailDashboard";
+import DetailDashboard from "../detailDashboard/DetailDashboard";
 
 
 const HomeDetailPage = () => {

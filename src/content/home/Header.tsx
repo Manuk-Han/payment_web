@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
-import { logout } from '../redux/authSlice';
+import { RootState } from '../../redux/store';
+import { logout } from '../../redux/authSlice';
 import './css/Header.css';
 
 const Header: React.FC = () => {

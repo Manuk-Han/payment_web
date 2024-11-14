@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import axiosInstance from '../../config/axiosInstance';
-import '../css/DetailProductDashboard.css';
+import './css/DetailProductDashboard.css';
 import LoginModal from "./modal/LoginModal";
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store";

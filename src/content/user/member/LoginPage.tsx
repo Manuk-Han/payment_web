@@ -3,8 +3,8 @@ import './css/LoginPage.css';
 import SignupPage from './SignupPage';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { setCredentials } from '../../redux/authSlice';
-import axiosInstance from '../../config/axiosInstance';
+import { setCredentials } from '../../../redux/authSlice';
+import axiosInstance from '../../../config/axiosInstance';
 import {jwtDecode} from "jwt-decode";
 
 interface SignInForm {

@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { checkLoginStatus } from './redux/authSlice';
-import LoginPage from './user/member/LoginPage';
-import HomePage from './home/HomePage';
-import HomeDetailPage from "./home/HomeDetailPage";
+import LoginPage from './content/user/member/LoginPage';
+import HomePage from './content/home/HomePage';
+import HomeDetailPage from "./content/home/HomeDetailPage";
 import { PageTabs } from "./redux/Tabs";
 import Payment from "./content/payment/Payment";
-import OAuth2RedirectHandler from "./user/member/OAuth2RedirectHandler";
+import OAuth2RedirectHandler from "./content/user/member/OAuth2RedirectHandler";
 import PaymentSuccess from "./content/payment/PaymentSuccess";
 import PaymentCancel from "./content/payment/PaymentCancel";
 import PaymentFail from "./content/payment/PaymentFail";
-import Header from "./home/Header";
-import Footer from "./home/Footer";
+import Header from "./content/home/Header";
+import Footer from "./content/home/Footer";
 import Cart from "./content/cart/Cart";
 import './App.css';
 
@@ -42,6 +42,7 @@ const App = () => {
                         <Route path="/payment/fail" element={<PaymentFail />} />
 
                         <Route path="/cart" element={<Cart />} />
+                        <Route path="/my-page" element={<HomePage />} />
 
                         <Route path="*" element={<Navigate to="/" />} />
                     </Routes>
