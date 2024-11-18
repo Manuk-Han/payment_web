@@ -13,6 +13,7 @@ const PaymentSuccess = () => {
             const tid = localStorage.getItem("tid");
             const pgToken = new URLSearchParams(window.location.search).get("pg_token");
             const purchaseId = new URLSearchParams(window.location.search).get("purchaseId");
+            const fromCart = new URLSearchParams(window.location.search).get("fromCart");
 
             if(!tid && !pgToken && !purchaseId) {
                 return;
@@ -29,6 +30,7 @@ const PaymentSuccess = () => {
                 approveForm.append("tid", tid);
                 approveForm.append("pgToken", pgToken);
                 approveForm.append("purchaseId", purchaseId);
+                approveForm.append("fromCart", fromCart || "false");
 
                 try {
                     await axiosInstance.post('/payment/success', approveForm,
