@@ -34,6 +34,7 @@ const Cart: React.FC = () => {
     const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
     const accessToken = useSelector((state: RootState) => state.auth.accessToken);
     const navigate = useNavigate();
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
     useEffect(() => {
         fetchCartItems();
@@ -90,8 +91,11 @@ const Cart: React.FC = () => {
         setDeleteTargetId(null);
     };
 
+
     const handleKakaoCartPayment = async () => {
         try {
+            setIsButtonDisabled(true);
+
             const selectedCartPaymentForms = cartItems
                 .filter(item => selectedItems.includes(item.cartId))
                 .map(item => ({
@@ -110,6 +114,8 @@ const Cart: React.FC = () => {
 
         } catch (error) {
             console.error("Failed to prepare multi-payment:", error);
+        } finally {
+            setTimeout(() => setIsButtonDisabled(false), 5000); // 5초 후 버튼 활성화
         }
     };
 
@@ -160,7 +166,9 @@ const Cart: React.FC = () => {
                 </table>
             )}
             <div className="cart-actions">
-                <button className="checkout-button" onClick={handleKakaoCartPayment}>
+                <button className="checkout-button"
+                        onClick={handleKakaoCartPayment}
+                        disabled={isButtonDisabled}>
                     결제하기
                 </button>
             </div>

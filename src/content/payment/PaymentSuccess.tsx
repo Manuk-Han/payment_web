@@ -57,7 +57,7 @@ const PaymentSuccess = () => {
         };
 
         recordOrder();
-    }, [accessToken, navigate]);
+    }, []);
 
     return (
         <div className="page-container">
