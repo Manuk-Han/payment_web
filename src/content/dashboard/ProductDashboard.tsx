@@ -35,8 +35,8 @@ const ProductDashboard: React.FC<ProductDashboardProps> = ({ onGoToPayment }) =>
             <h1>Product List</h1>
             <ul className="product-list">
                 {products.map(product => (
-                    <li key={product.productId} className="product-item">
-                        <div onClick={() => handleProductClick(product.productId)}>
+                    <li key={product.productId} className="product-item" onClick={() => handleProductClick(product.productId)}>
+                        <div>
                             {product.name}
                         </div>
                     </li>

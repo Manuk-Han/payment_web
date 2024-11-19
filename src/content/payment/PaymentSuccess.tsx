@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react';
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../config/axiosInstance";
 
 const PaymentSuccess = () => {
     const navigate = useNavigate();
-    const accessToken = useSelector((state: RootState) => state.auth.accessToken);
 
     useEffect(() => {
         const recordOrder = async () => {
@@ -18,10 +15,6 @@ const PaymentSuccess = () => {
             if(!tid && !pgToken && !purchaseId) {
                 return;
             } else if(!tid || !pgToken || !purchaseId) {
-                console.log('tid:', tid);
-                console.log('pgToken:', pgToken);
-                console.log('purchaseId:', purchaseId);
-
                 navigate('/payment/fail');
             }
 
