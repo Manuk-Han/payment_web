@@ -45,7 +45,7 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({ tab, onTabChange }) =
                     className={`header-tab ${selectedTab === PageTabs.RANK ? 'active' : ''}`}
                     onClick={() => handleTabClick(PageTabs.RANK)}
                 >
-                    Price
+                    Rank
                 </button>
             </div>
             {userRole === UserRole.USER && (
