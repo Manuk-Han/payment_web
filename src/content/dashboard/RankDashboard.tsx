@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PriceDashboard: React.FC = () => {
+const RankDashboard: React.FC = () => {
     return (
         <div className="price-panel">
             <table className="price-table">
@@ -33,4 +33,4 @@ const PriceDashboard: React.FC = () => {
     );
 };
 
-export default PriceDashboard;
+export default RankDashboard;

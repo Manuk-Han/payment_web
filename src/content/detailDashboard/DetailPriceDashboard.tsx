@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface PriceProps {
+interface RankProps {
     id: number;
 }
 
-const DetailPriceDashboard: React.FC<PriceProps> = ({ id }) => {
+const DetailPriceDashboard: React.FC<RankProps> = ({ id }) => {
     return (
         <div>
             {id}

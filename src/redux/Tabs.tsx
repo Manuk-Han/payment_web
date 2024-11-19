@@ -1,6 +1,6 @@
 export enum PageTabs {
     PRODUCT = '/product',
-    PRICE = '/price',
+    RANK = '/rank',
     USER = '/user',
     CART = '/cart',
 }

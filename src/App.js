@@ -32,7 +32,7 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={<HomePage nowTab={PageTabs.PRODUCT} />} />
                         <Route path="/product" element={<HomePage nowTab={PageTabs.PRODUCT} />} />
-                        <Route path="/price" element={<HomePage nowTab={PageTabs.PRICE} />} />
+                        <Route path="/rank" element={<HomePage nowTab={PageTabs.RANK} />} />
                         <Route path="/sign-in" element={<LoginPage />} />
                         <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
                         <Route path="/product/:id" element={<HomeDetailPage />} />

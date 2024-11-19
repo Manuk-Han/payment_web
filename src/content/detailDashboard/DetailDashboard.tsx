@@ -13,7 +13,7 @@ const DetailDashboard: React.FC<DashboardProps> = ({ selectedTab, id }) => {
     return (
         <div className="dashboard">
             {selectedTab === PageTabs.PRODUCT && <DetailProductDashboard id={id}/>}
-            {selectedTab === PageTabs.PRICE && <DetailPriceDashboard id={id}/>}
+            {selectedTab === PageTabs.RANK && <DetailPriceDashboard id={id}/>}
         </div>
     );
 };

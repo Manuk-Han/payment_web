@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductDashboard from './ProductDashboard';
-import PriceDashboard from './PriceDashboard';
+import RankDashboard from './RankDashboard';
 import {PageTabs} from "../../redux/Tabs";
 import './css/Dashboard.css';
 
@@ -13,7 +13,7 @@ const Dashboard: React.FC<DashboardProps> = ({ selectedTab, onGoToPayment }) => 
     return (
         <div className="dashboard">
             {selectedTab === PageTabs.PRODUCT && <ProductDashboard onGoToPayment={onGoToPayment} />}
-            {selectedTab === PageTabs.PRICE && <PriceDashboard />}
+            {selectedTab === PageTabs.RANK && <RankDashboard />}
         </div>
     );
 };
