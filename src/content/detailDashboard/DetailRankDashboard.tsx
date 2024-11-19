@@ -4,7 +4,7 @@ interface RankProps {
     id: number;
 }
 
-const DetailPriceDashboard: React.FC<RankProps> = ({ id }) => {
+const DetailRankDashboard: React.FC<RankProps> = ({ id }) => {
     return (
         <div>
             {id}
@@ -12,4 +12,4 @@ const DetailPriceDashboard: React.FC<RankProps> = ({ id }) => {
     );
 };
 
-export default DetailPriceDashboard;
+export default DetailRankDashboard;
